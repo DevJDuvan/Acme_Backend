@@ -1,0 +1,38 @@
+//////------- consultar ventas
+
+router.get('/consultar_ventas/', (req, res) => {
+    // si el video es personal o comercial debe llegar un 1
+
+    ventas.findAll({
+    }).then(async ventashechas => {
+        if (ventashechas) {
+            res.json({ "status": "success", "message": "consulta correcto", "ventas hechas": ventashechas })
+        } else { res.status(401) }
+    })
+
+
+})
+
+////////////
+
+
+//---consultar ventas agrupadas por sucursales
+
+router.get('/consultar_ventasagrupadas/', (req, res) => {
+    ventas.findAll({
+      //  attributes: ["id_punto_venta"],
+      //  group: "id_punto_venta",
+       // order: ["id_punto_venta", "ASC"],
+
+        order: [
+          
+            ['id_punto_venta', 'DESC'],]
+        
+    }).then(async ventas_agrupadas => {
+        if (ventas_agrupadas) {
+            res.json({ "status": "success", "message": "consulta correcto", "ventas_agrupadas": ventas_agrupadas })
+        } else { res.status(401) }
+    })
+
+
+})
